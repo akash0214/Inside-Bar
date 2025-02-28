@@ -6,6 +6,7 @@ venv/
 # Ignore API credentials and sensitive config files
 apiCred.json
 config.json
+access_token.json
 *.pem
 *.key
 
