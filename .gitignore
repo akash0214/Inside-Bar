@@ -1,0 +1,45 @@
+# Ignore virtual environment
+venv/
+.my_env/
+.env/
+
+# Ignore API credentials and sensitive config files
+apiCred.json
+config.json
+*.pem
+*.key
+
+# Ignore compiled Python files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore logs and system files
+logs/
+*.log
+.DS_Store
+Thumbs.db
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore dependency caches
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Ignore IDE/editor config files
+.vscode/
+.idea/
+*.sublime-workspace
+
+# Ignore build and distribution directories
+build/
+dist/
+*.egg-info/
+
+# Ignore testing and coverage reports
+.tox/
+.nox/
+.coverage
+htmlcov/
