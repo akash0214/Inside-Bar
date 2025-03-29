@@ -1,9 +1,9 @@
 # Install pytz
-from fyers_apiv3 import fyersModel
+from fyers_apiv3 import fyersModel # type: ignore
 from datetime import datetime, timedelta
-from pytz import timezone
+from pytz import timezone # type: ignore
 import json
-import time
+import pandas as pd # type: ignore
 
 # Extracting client details
 apiCredFile = open('./apiCred.json')
@@ -17,7 +17,7 @@ access_token = access_tokenObj['access_token']
 
 fyers = fyersModel.FyersModel(client_id=client_id, token=access_token, is_async=False, log_path="")
 
-symbols = ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'SBIN']
+symbols = ['RELIANCE', 'HDFCBANK', 'ICICIBANK', 'SBIN', 'INFY', 'HINDUNILVR']
 tickers = ['NSE:NIFTY50-INDEX', 'NSE:NIFTYBANK-INDEX']
 for symbol in symbols:
     tickers.append("NSE:"+symbol+"-EQ")
@@ -25,7 +25,7 @@ for symbol in symbols:
 ist = timezone('Asia/Kolkata')
 current_time = datetime.now(ist)
 range_to_date = current_time.strftime('%Y-%m-%d')
-range_from_time = current_time - timedelta(days=5)
+range_from_time = current_time - timedelta(days=15)
 range_from_date = range_from_time.strftime('%Y-%m-%d')
 
 def spot_inside(data):
@@ -49,4 +49,5 @@ for i in tickers:
     candleData = fyers.history(data=options)['candles']
     inside_bars = spot_inside(candleData)
     filterList[i] = inside_bars
-print(filterList)
+df = pd.DataFrame([(k, ','.join(v) if v else "No inside bars") for k,v in filterList.items()], columns=['Symbol', 'Inside Bar Timestamp'])
+print(df)
